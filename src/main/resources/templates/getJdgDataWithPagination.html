@@ -1,0 +1,62 @@
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<p th:text="${accountExtractListOfMap}"></p>
+
+<div class="container">
+    <h2>Table to view JDG Data</h2>
+
+    <table class="table table-hover">
+    <thead >
+    <tr>
+        <th  th:each="field: ${headerFields}">
+            <p th:text="${field}"></p>
+        </th>
+    </tr>
+    </thead>
+        <tbody >
+        <tr th:each="accountExtractMap : ${accountListOfMap}">
+            <td th:text="${accountExtractMap.division}"></td>
+            <td th:text="${accountExtractMap.invcTypeCd}"></td>
+            <td th:text="${accountExtractMap.invcNum}"></td>
+            <td th:text="${accountExtractMap.salesLedgerName}"></td>
+            <td th:text="${accountExtractMap.statusCd}"></td>
+<!--            <td th:text="${accountExtractMap.chassisNo}"></td>-->
+            <td> -Chasis No-</td>
+            <td th:text="${accountExtractMap.invcDt}"></td>
+<!--            <td th:text="${accountExtractMap.invoiceEndDate}"></td>-->
+            <td> -Invoice End Date-</td>
+<!--            <td th:text="${accountExtractMap.invoiceMonth}"></td>-->
+            <td> -Invoice Month-</td>
+<!--            <td th:text="${accountExtractMap.invoiceYear}"></td>-->
+            <td> -Invoice Year-</td>
+<!--            <td><a href="#" th:text="${accountExtractList.vatClassification7}">Title ...</a></td>-->
+<!--            <td th:text="${accountExtractList.vatClassification8}">Text ...</td>-->
+        </tr>
+        </tbody>
+
+</table>
+</div>
+<p>Pages:</p>
+<div class="row" th:fragment="pagination">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <nav aria-label="Pagination">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:each="pageNumber : ${pageNumbers}" >
+                    <a class="page-link" th:href="@{|/api/v1/dataExtractor/extract?pageNumber=${pageNumber}|}" th:text=${pageNumber}>1</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+</body>
+</html>
